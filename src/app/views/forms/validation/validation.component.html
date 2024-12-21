@@ -1,0 +1,497 @@
+<div class="title-header">
+  <div class="btn" style="margin-right: 10px;
+display: flex;
+justify-content: space-between;">
+
+    <h4>หัวข้อหลัก</h4>
+    <button cButton color="primary" class="text" style="margin-right: 10px;" (click)="nevAdd()">เพิ่มข้อมูล</button>
+  </div>
+
+  <div class="data-grid">
+    <dx-data-grid id="gridContainer" [dataSource]="_mainData.Value" [showBorders]="true">
+      <dxo-editing mode="row">
+      </dxo-editing>
+
+
+      <div *dxTemplate="let data of 'cellTemplateDelte'">
+        <!-- <dx-button hint="delete" class="btn-delete" requirePermission="VIEW" type="danger" (onClick)="openDeletePopup(data.component.pageIndex() * data.component.pageSize() + data.rowIndex)"><i class="fa fa-trash"></i>
+        </dx-button> -->
+        <button cButton color="danger"
+          (click)="openDeletePopup(data.component.pageIndex() * data.component.pageSize() + data.rowIndex)" class="text"
+          style="margin-right: 10px;">ลบ</button>
+
+        <!-- <button cButton color="primary"
+          (click)="openMainEditPopup(data.component.pageIndex() * data.component.pageSize() + data.rowIndex)">แก้ไข</button> -->
+
+        <button cButton color="primary"
+          (click)="openMainEditPopup(data.component.pageIndex() * data.component.pageSize() + data.rowIndex)">แก้ไข</button>
+
+      </div>
+      <dxi-column [width]="150" cellTemplate="cellTemplateDelte"></dxi-column>
+
+
+      <dxi-column dataField="MAIN_ID" [width]="80"></dxi-column>
+      <dxi-column dataField="TITLE" [width]="300"></dxi-column>
+      <dxi-column dataField="CREATE_DATE" [width]="150"></dxi-column>
+      <dxi-column dataField="TITLE_DESCRIPTION"></dxi-column>
+
+
+      <div *dxTemplate="let col of 'cellTemplateSubEdit'">
+
+        <button style="margin-right: 10px;" cButton color="primary"
+          (click)="showData(col.component.pageIndex() * col.component.pageSize() + col.rowIndex)">ข้อมูล</button>
+
+        <!-- (click)="onSubTitleEdit(col.component.pageIndex() * col.component.pageSize() + col.rowIndex)" -->
+
+
+
+
+      </div>
+      <dxi-column [width]="80" cellTemplate="cellTemplateSubEdit"></dxi-column>
+
+
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30]"></dxo-pager>
+
+    </dx-data-grid>
+  </div>
+
+</div>
+
+
+<dx-popup [width]="800" [height]="800" [hideOnOutsideClick]="false" [showCloseButton]="false"
+  [(visible)]="addParamPopup" title="หัวข้อย่อย">
+  <div class="header" style="    flex-direction: row-reverse;
+">
+
+    <div>
+      <div class=""></div>
+      <button style="margin-right: 10px;" cButton color="primary" (click)="addNewSubTitlePopup()">เพิ่มข้อมูล</button>
+    </div>
+
+    <div class="data-grid">
+      <dx-data-grid id="gridContainer" [dataSource]="subTitle.Value" [showBorders]="true">
+        <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false">
+        </dxo-editing>
+
+        <div *dxTemplate="let data of 'dataCell'">
+          <button style="margin-right: 10px;" cButton color="primary"
+            (click)="getParamData(data.component.pageIndex() * data.component.pageSize() + data.rowIndex)">ข้อมูล</button>
+        </div>
+        <dxi-column [width]="80" cellTemplate="dataCell"></dxi-column>
+
+
+
+
+        <dxi-column dataField="SUB_TITLE"></dxi-column>
+        <dxi-column dataField="SUB_TITLE_DESCRIPTION"></dxi-column>
+        <dxi-column dataField="METHOD"></dxi-column>
+        <dxi-column dataField="URL"></dxi-column>
+
+
+
+        <div *dxTemplate="let data of 'cellTemplateDelte'">
+          <button style="margin-right: 10px;" cButton color="primary"
+            (click)="onEdit(data.component.pageIndex() * data.component.pageSize() + data.rowIndex)">แก้ไข</button>
+
+          <button cButton color="danger"
+            (click)="onDelete(data.component.pageIndex() * data.component.pageSize() + data.rowIndex)" class="text"
+            style="margin-right: 10px;">ลบ</button>
+        </div>
+        <dxi-column [width]="150" cellTemplate="cellTemplateDelte"></dxi-column>
+
+
+
+      </dx-data-grid>
+    </div>
+  </div>
+  <div class="" style="
+  display: flex;
+  margin-right: 20px;
+  justify-content: right;">
+    <button cButton class="text" color="danger" style="margin: 20px 0; display: flex; justify-content: center;"
+      (click)="showDataOnClose()">ยกเลิก
+    </button>
+  </div>
+</dx-popup>
+
+
+<!-- editpoppup -->
+
+<dx-popup [width]="560" [height]="350" [hideOnOutsideClick]="false" [showCloseButton]="false" [(visible)]="subEditPopup"
+  title="แก้ไข">
+
+  <dx-form [formData]="subEditdata" [colCount]="3">
+    <dxi-item dataField="TITLE" [colSpan]="3"></dxi-item>
+    <dxi-item [editorOptions]="height" editorType="dxTextArea" dataField="TITLE_DESCRIPTION" [colSpan]="3"></dxi-item>
+  </dx-form>
+
+  <div class="" style="display: flex; ; justify-content: center; margin: 30px 0;">
+    <button cButton class="text" color="success" style="margin: 0 20px;" (click)="onSubmitTitleEdit()">บันทึก</button>
+    <button cButton class="cancle-btn text" color="danger" (click)="openMainEditPopupClose()">ยกเลิก</button>
+
+  </div>
+
+
+
+</dx-popup>
+
+
+
+
+
+
+
+
+
+
+
+<!-- subedit -->
+
+
+<dx-popup [width]="660" [height]="440" [hideOnOutsideClick]="false" [showCloseButton]="false" [(visible)]="editPopup"
+  title="แก้ไข">
+
+  <dx-form [formData]="editDataForm" [colCount]="3">
+    <dxi-item dataField="SUB_TITLE" [colSpan]="3"></dxi-item>
+    <dxi-item dataField="METHOD" [colSpan]="2">
+      <dx-select-box [items]="_method" [(value)]="editDataForm.METHOD"></dx-select-box>
+    </dxi-item>
+    <dxi-item dataField="URL" [colSpan]="1"></dxi-item>
+    <dxi-item [editorOptions]="height" editorType="dxTextArea" dataField="SUB_TITLE_DESCRIPTION"
+      [colSpan]="3"></dxi-item>
+  </dx-form>
+
+  <div class="" style="display: flex; ; justify-content: center; margin: 30px 0;">
+    <button cButton class="text" color="success" style="margin: 0 20px;"
+      (click)="onSubmitSubtitleEdit()">แก้ไขข้อมูล</button>
+    <button cButton class="cancle-btn text" color="danger" (click)="onSubmitSubtitleEditClose()">ยกเลิก</button>
+
+  </div>
+
+
+
+</dx-popup>
+
+
+<!-- parampopup -->
+
+<!-- TagParam -->
+<dx-popup [width]="800" [height]="900" [hideOnOutsideClick]="false" [showCloseButton]="false" [(visible)]="paramPopup"
+  title="ข้อมูล Parameter">
+
+  <div class="head" style="display: flex; justify-content: space-between;">
+    <div class="txt">
+      <h4>PARAMETER</h4>
+    </div>
+    <div class="btn">
+      <button cButton class="text" color="success" style="margin: 0 20px;" (click)="showParamPopup()">เพิ่มข้อมูล</button>
+    </div>
+  </div>
+
+  <div class="header">
+
+    <div class="data-grid">
+      <dx-data-grid id="gridContainer" [dataSource]="paramData.Value" [showBorders]="true">
+        <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false">
+        </dxo-editing>
+
+        <dxi-column dataField="PARAMETER_NAME"></dxi-column>
+        <dxi-column dataField="PARAMETER_STATUS"></dxi-column>
+        <dxi-column dataField="PARAMETER_TYPE"></dxi-column>
+        <dxi-column dataField="PARAMETER_DESCRIPTION"></dxi-column>
+
+
+
+
+        <div *dxTemplate="let data of 'cellTemplateDelte'">
+          <button style="margin-right: 10px;" cButton color="primary"
+            (click)="onParamEdit(data.component.pageIndex() * data.component.pageSize() + data.rowIndex)">แก้ไข</button>
+
+          <button cButton color="danger"
+            (click)="onParamDelete(data.component.pageIndex() * data.component.pageSize() + data.rowIndex)" class="text"
+            style="margin-right: 10px;">ลบ</button>
+        </div>
+        <dxi-column [width]="150" cellTemplate="cellTemplateDelte"></dxi-column>
+
+
+
+      </dx-data-grid>
+    </div>
+  </div>
+
+  <div class="space"></div>
+
+
+
+  <!-- meta -->
+
+
+
+  <div class="meta">
+    <div class="containers" style="margin: 10px 0;">
+
+      <div class="" style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;">
+        <div class="">
+          <h4>Meta Data</h4>
+        </div>
+        <div class="btn">
+          <button cButton class="text" color="success" style="margin: 10px 0;"
+            (click)="showAddMeta()">เพิ่มข้อมูล</button>
+        </div>
+      </div>
+
+
+      <dx-data-grid id="gridContainer" style="position: relative;" [dataSource]="metaData.Value" [showBorders]="true">
+        <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false">
+        </dxo-editing>
+        <dxo-editing mode="row">
+        </dxo-editing>
+
+        <dxi-column dataField="META_NAME" [width]="250"></dxi-column>
+        <dxi-column dataField="META_DETAIL"></dxi-column>
+
+        <div *dxTemplate="let col of 'cellTemplateSubEdit'">
+          <button style="margin-right: 10px;" cButton color="primary"
+            (click)="onMetaEdit(col.component.pageIndex() * col.component.pageSize() + col.rowIndex)">แก้ไข</button>
+          <button cButton color="danger"
+            (click)="onMetaDelete(col.component.pageIndex() * col.component.pageSize() + col.rowIndex)" class="text"
+            style="margin-right: 10px;">ลบ</button>
+        </div>
+        <dxi-column [width]="150" cellTemplate="cellTemplateSubEdit"></dxi-column>
+
+      </dx-data-grid>
+    </div>
+  </div>
+  <div class="space"></div>
+
+
+  <!-- JSON -->
+
+  <div class="jsonbody containers" style="margin: 10px 0;">
+    <div class="heads" style="display: flex; justify-content: space-between;">
+      <div class="">
+        <h4>JSON</h4>
+      </div>
+
+      <div class="btn" style="display: flex; justify-content: left;">
+        <div class="">
+          <button cButton class="text" color="success" style="margin: 20px 0;" (click)="showAddJson()">เพิ่ม</button>
+        </div>
+
+        <div class="">
+          <button cButton class="text" color="primary" style="margin: 20px 10px;"
+            (click)="showEditJson()">แก้ไข</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="json">
+      <dx-form [readOnly]="true" [formData]="getJsonDatas" [colCount]="4">
+        <dxi-item [colSpan]="4" [editorOptions]="height" editorType="dxTextArea" dataField="JSON">
+          <dxo-label template="JSON"></dxo-label>
+        </dxi-item>
+      </dx-form>
+    </div>
+  </div>
+
+
+  <div class="" style="    display: flex;
+  justify-content: right;
+  margin-right: 15px;">
+    <button cButton class="text" color="danger" style="margin: 20px 0; display: flex; justify-content: center;"
+      (click)="getParamDataClose()">ยกเลิก
+    </button>
+  </div>
+</dx-popup>
+
+
+<!-- parameter edit -->
+
+<dx-popup [width]="660" [height]="440" [hideOnOutsideClick]="false" [showCloseButton]="false"
+  [(visible)]="editParamPopup" title="แก้ไข parameter">
+
+  <div class="Forms">
+    <dx-form [formData]="editParamDetail" [colCount]="3">
+      <dxi-item dataField="PARAMETER_NAME" [colSpan]="3"></dxi-item>
+      <dxi-item dataField="PARAMETER_STATUS" [colSpan]="3">
+        <dx-select-box [items]="_required" [(value)]="editParamDetail.PARAMETER_STATUS"></dx-select-box>
+      </dxi-item>
+      <dxi-item [editorOptions]="height" editorType="dxTextArea" dataField="PARAMETER_DESCRIPTION"
+        [colSpan]="3"></dxi-item>
+    </dx-form>
+  </div>
+
+
+  <div class="" style="display: flex; ; justify-content: center; margin: 30px 0;">
+    <button cButton class="text" color="success" style="margin: 0 20px;" (click)="onParamEditSubmit()">บันทึก</button>
+    <button cButton class="cancle-btn text" color="danger" (click)="onParamEditSubmitClose()">ยกเลิก</button>
+
+  </div>
+
+
+
+</dx-popup>
+
+<!-- addSubParam -->
+
+<dx-popup [width]="660" [height]="440" [hideOnOutsideClick]="false" [showCloseButton]="false"
+  [(visible)]="SubParamPopup" title="แก้ไข parameter">
+
+  <div class="Forms">
+    <dx-form [formData]="SubParamForm" [colCount]="3">
+      <dxi-item dataField="PARAMETER_NAME" [colSpan]="3"></dxi-item>
+      <dxi-item dataField="PARAMETER_STATUS" [colSpan]="3">
+        <dx-select-box [items]="_required" [(value)]="SubParamForm.PARAMETER_STATUS"></dx-select-box>
+      </dxi-item>
+      <dxi-item [editorOptions]="height" editorType="dxTextArea" dataField="PARAMETER_DESCRIPTION"
+        [colSpan]="3"></dxi-item>
+    </dx-form>
+  </div>
+
+
+  <div class="" style="display: flex; ; justify-content: center; margin: 30px 0;">
+    <button cButton class="text" color="success" style="margin: 0 20px;" (click)="ParamPopup()">บันทึก</button>
+    <button cButton class="cancle-btn text" color="danger" (click)="ParamPopupClose()">ยกเลิก</button>
+
+  </div>
+</dx-popup>
+
+
+
+
+
+<!-- add json  -->
+<dx-popup [width]="660" [height]="440" [hideOnOutsideClick]="false" [showCloseButton]="false" [(visible)]="jsonPopup"
+  title="add - edit">
+
+  <div class="json">
+    <dx-form [formData]="JsonData" [colCount]="4">
+      <dxi-item [colSpan]="4" [editorOptions]="height" editorType="dxTextArea" dataField="JSON">
+        <dxo-label template="JSON"></dxo-label>
+      </dxi-item>
+    </dx-form>
+  </div>
+
+  <div class="" style="display: flex; ; justify-content: center; margin: 30px 0;">
+    <button cButton class="text" color="success" style="margin: 0 20px;" (click)="addJson()">บันทึก</button>
+    <button cButton class="cancle-btn text" color="danger" (click)="addJsonClose()">ยกเลิก</button>
+
+  </div>
+
+
+
+</dx-popup>
+
+
+<!-- edit json -->
+<dx-popup [width]="660" [height]="440" [hideOnOutsideClick]="false" [showCloseButton]="false"
+  [(visible)]="jsonEditPopup" title="add - edit">
+
+  <div class="json">
+    <dx-form [formData]="getJsonDatas" [colCount]="4">
+      <dxi-item [colSpan]="4" [editorOptions]="height" editorType="dxTextArea" dataField="JSON">
+        <dxo-label template="JSON"></dxo-label>
+      </dxi-item>
+    </dx-form>
+  </div>
+
+  <div class="" style="display: flex; ; justify-content: center; margin: 30px 0;">
+    <button cButton class="text" color="success" style="margin: 0 20px;" (click)="editJson()">บันทึก</button>
+    <button cButton class="cancle-btn text" color="danger" (click)="editJsonClose()">ยกเลิก</button>
+
+  </div>
+
+
+
+</dx-popup>
+
+
+<!-- addnewsub -->
+
+<dx-popup [width]="660" [height]="440" [hideOnOutsideClick]="false" [showCloseButton]="false"
+  [(visible)]="addNewSubtitleStatus" title="add - edit">
+
+  <div class="">
+    <dx-form [formData]="newSubForm" [colCount]="4">
+
+      <dxi-item [colSpan]="2" dataField="SUB_TITLE">
+        <dxo-label template="ชื่อ"></dxo-label>
+      </dxi-item>
+      <dxi-item dataField="METHOD" [colSpan]="2">
+        <dx-select-box [items]="_method" [(value)]="newSubForm.METHOD"></dx-select-box>
+      </dxi-item>
+      <dxi-item [colSpan]="4" dataField="URL">
+        <dxo-label template="URL"></dxo-label>
+      </dxi-item>
+      <dxi-item [colSpan]="4" [editorOptions]="height" editorType="dxTextArea" dataField="SUB_TITLE_DESCRIPTION">
+        <dxo-label template="คำอธิบาย"></dxo-label>
+      </dxi-item>
+
+    </dx-form>
+  </div>
+
+  <div class="" style="display: flex; ; justify-content: center; margin: 30px 0;">
+    <button cButton class="text" color="success" style="margin: 0 20px; " (click)="onSubmitNewSub()">บันทึก</button>
+    <button cButton class="cancle-btn text" color="danger" (click)="onSubmitNewSubClose()">ยกเลิก</button>
+  </div>
+
+
+
+</dx-popup>
+
+
+
+
+<!-- addmeta -->
+<dx-popup [width]="660" [height]="440" [hideOnOutsideClick]="false" [showCloseButton]="false" [(visible)]="addMetaPopup"
+  title="add - edit">
+
+  <div class="">
+    <dx-form [formData]="metaDataForm" [colCount]="4">
+
+      <dxi-item [colSpan]="4" dataField="META_NAME">
+        <dxo-label template="METANAME"></dxo-label>
+      </dxi-item>
+      <dxi-item [colSpan]="4" dataField="META_DETAIL">
+        <dxo-label template="METADETAIL"></dxo-label>
+      </dxi-item>
+
+    </dx-form>
+  </div>
+
+  <div class="" style="display: flex; ; justify-content: center; margin: 30px 0;">
+    <button cButton class="text" color="success" style="margin: 0 20px;" (click)="addMeta()">บันทึก</button>
+    <button cButton class="cancle-btn text" color="danger" (click)="addMetaClose()">ยกเลิก</button>
+  </div>
+</dx-popup>
+
+
+<!-- editMeta -->
+
+
+<dx-popup [width]="660" [height]="440" [hideOnOutsideClick]="false" [showCloseButton]="false" [(visible)]="metaPopup"
+  title="add - edit">
+
+  <div class="">
+    <dx-form [formData]="editMetaData" [colCount]="4">
+
+      <dxi-item [colSpan]="4" dataField="META_NAME">
+        <dxo-label template="METANAME"></dxo-label>
+      </dxi-item>
+      <dxi-item [colSpan]="4" dataField="META_DETAIL">
+        <dxo-label template="METADETAIL"></dxo-label>
+      </dxi-item>
+
+    </dx-form>
+  </div>
+
+  <div class="" style="display: flex; ; justify-content: center; margin: 30px 0;">
+    <button cButton class="text" color="success" style="margin: 0 20px;" (click)="saveEditMeta()">บันทึก</button>
+    <button cButton class="cancle-btn text" color="danger" (click)="editMetaClose()">ยกเลิก</button>
+  </div>
+</dx-popup>
+

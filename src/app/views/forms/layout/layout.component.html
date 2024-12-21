@@ -1,0 +1,154 @@
+<div class="title-header">
+
+  <h1>เพิ่มหัวข้อหลัก</h1>
+  <dx-form [formData]="titleData" [colCount]="4">
+    <dxi-item [colSpan]="2" dataField="title">
+      <dxo-label template="หัวข้อ"></dxo-label>
+    </dxi-item>
+    <dxi-item [colSpan]="1" dataField="category_id">
+      <dxo-label template="หมวดหมู่"></dxo-label>
+      <dx-select-box [items]="_category" [dataSource]="_category" [(value)]="titleData.category_id"
+        valueExpr="CATEGORY_ID" displayExpr="CATEGORY_NAME"></dx-select-box>
+    </dxi-item>
+    <dxi-item></dxi-item>
+
+    <dxi-item [editorOptions]="heights" editorType="dxTextArea" dataField="title_description" [colSpan]="4">
+      <dxo-label template="คำอธิบาย"></dxo-label>
+    </dxi-item>
+
+
+  </dx-form>
+</div>
+
+
+<div class="empty"></div>
+
+<div class="header">
+
+  <div class="s-btw">
+    <div class="">
+      <h3>เพิ่มหัวข้อย่อย</h3>
+    </div>
+
+    <div class="">
+      <button cButton class="text" color="success" (click)="showSubtitlePopup()">เพิ่มข้อมูล</button>
+    </div>
+  </div>
+
+  <div class="data-grid">
+
+    <dx-data-grid id="gridContainer" [dataSource]="_popupDataSubTitleDataArr" [showBorders]="true">
+      <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="true">
+      </dxo-editing>
+      <dxo-editing mode="row">
+      </dxo-editing>
+
+
+      <div *dxTemplate="let data of 'cellTemplateDelte'">
+        <button cButton color="primary"style="margin-left: 10px;" (click)="addSubtitlteDetail()">ข้อมูล</button>
+      </div>
+
+      <dxi-column [width]="100" cellTemplate="cellTemplateDelte"></dxi-column>
+
+
+      <dxi-column dataField="sub_title"[width]="250"></dxi-column>
+      <dxi-column dataField="sub_title_description"[width]="120"></dxi-column>
+      <dxi-column dataField="method"[width]="80"></dxi-column>
+      <dxi-column dataField="url"[width]="120"></dxi-column>
+
+      <dxo-paging [pageSize]="100"></dxo-paging>
+
+    </dx-data-grid>
+
+
+
+
+  </div>
+</div>
+
+
+<div class="empty"></div>
+
+<div class="empty"></div>
+
+
+<div class="send-data">
+  <div class="">
+    <button cButton class="text" style="margin-right: 20px;" color="success" (click)="sendData()">ส่งข้อมูล</button>
+    <button cButton class="text" color="danger">ยกเลิก</button>
+
+  </div>
+</div>
+
+
+<!-- popup -->
+
+<dx-popup [width]="760" [height]="340" [hideOnOutsideClick]="true" [showCloseButton]="true" [(visible)]="popup"
+  title="add">
+
+  <div class="form">
+    <dx-form [formData]="popupData" [colCount]="3">
+      <dxi-item dataField="parameter_name"></dxi-item>
+      <!-- <dxi-item dataField="required"></dxi-item> -->
+      <dxi-item dataField="required_status">
+        <dx-select-box [items]="_required" [(value)]="popupData.required_status"></dx-select-box>
+      </dxi-item>
+      <dxi-item [disabled]="true" dataField="type"></dxi-item>
+
+      <dxi-item [editorOptions]="heights" editorType="dxTextArea" dataField="parameter_description" [colSpan]="3">
+        <dxo-label template="คำอธิบาย"></dxo-label> </dxi-item>
+
+    </dx-form>
+
+  </div>
+
+  <div class="row">
+    <div class="btn">
+      <button class="save-btn text" cButton color="success" (click)="onSubmitPopup()">เพิ่มข้อมูล</button>
+      <button cButton class="cancle-btn text" color="danger" (click)="onSubmitPopupClose()">ยกเลิก</button>
+    </div>
+
+  </div>
+
+
+
+
+
+</dx-popup>
+
+
+<dx-popup [width]="760" [height]="540" [hideOnOutsideClick]="true" [showCloseButton]="true" [(visible)]="subtitlePopup"
+  title="add">
+  <div class="">
+    <h1>เพิ่มหัวข้อย่อย</h1>
+    <dx-form [formData]="subTitleData" [colCount]="4">
+      <dxi-item [colSpan]="2" dataField="sub_title">
+        <dxo-label template="หัวข้อ"></dxo-label>
+      </dxi-item>
+      <dxi-item [colSpan]="2" dataField="method">
+        <dx-select-box [items]="_method" [(value)]="subTitleData.method"></dx-select-box>
+      </dxi-item>
+
+      <dxi-item dataField="url" [colSpan]="4"></dxi-item>
+
+
+      <dxi-item [editorOptions]="heights" editorType="dxTextArea" dataField="sub_title_description" [colSpan]="4">
+        <dxo-label template="คำอธิบาย"></dxo-label>
+      </dxi-item>
+
+
+    </dx-form>
+
+    <div class="row">
+      <div class="btn">
+        <button class="save-bte text" cButton color="success"
+          (click)="onSubmitSubtitlePopupDetail()">เพิ่มข้อมูล</button>
+        <button cButton class="cancle-btn text" color="danger"
+          (click)="onSubmitSubtitlePopupDetailClose()">ยกเลิก</button>
+      </div>
+
+    </div>
+  </div>
+</dx-popup>
+
+

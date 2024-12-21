@@ -1,0 +1,274 @@
+<div class="btn" style="display: flex; justify-content: right;">
+  <div class="">
+    <button cButton class="text" color="success" (click)="nevBack()">ย้อนกลับ</button>
+  </div>
+</div>
+
+<div class="inputboard ">
+  <div class="title-header" *ngIf="showButton == true">
+
+    <h1>เพิ่มหัวข้อหลัก</h1>
+    <dx-form [formData]="titleData" [colCount]="4">
+      <dxi-item [colSpan]="2" dataField="TITLE">
+        <dxo-label template="หัวข้อ"></dxo-label>
+      </dxi-item>
+      <dxi-item [colSpan]="2" dataField="CATEGORY_ID">
+        <dxo-label template="หมวดหมู่"></dxo-label>
+        <dx-select-box [items]="_category" [dataSource]="_category" [(value)]="titleData.CATEGORY_ID"
+          valueExpr="CATEGORY_ID" displayExpr="CATEGORY_NAME"></dx-select-box>
+      </dxi-item>
+
+      <dxi-item [editorOptions]="heights" editorType="dxTextArea" dataField="TITLE_DESCRIPTION" [colSpan]="4">
+        <dxo-label template="คำอธิบาย"></dxo-label>
+      </dxi-item>
+    </dx-form>
+    <div class="btn" style="display: flex; justify-content: center;">
+       <button cButton class="cancle-btn text" color="success" (click)="onSubmitTitle()">เพิ่มข้อมูล</button>
+    </div>
+
+  </div>
+
+  <div class="title-header" *ngIf="showButton == false">
+
+    <h1>เพิ่มหัวข้อหลัก</h1>
+    <dx-form [readOnly]="true" [formData]="titleDataForm" [colCount]="4">
+      <dxi-item [colSpan]="2" dataField="TITLE">
+        <dxo-label template="หัวข้อ"></dxo-label>
+      </dxi-item>
+
+      <!-- <dxi-item [colSpan]="2" dataField="CATEGORY_NAME">
+        <dxo-label template="หมวดหมู่"></dxo-label>
+      </dxi-item> -->
+
+      <dxi-item [colSpan]="2" dataField="CATEGORY_ID">
+        <dxo-label template="หมวดหมู่"></dxo-label>
+        <dx-select-box  [readOnly]="true" [items]="_category" [dataSource]="_category" [(value)]="titleData.CATEGORY_ID"
+          valueExpr="CATEGORY_ID" displayExpr="CATEGORY_NAME"></dx-select-box>
+      </dxi-item>
+
+
+      <dxi-item [editorOptions]="heights" editorType="dxTextArea" dataField="TITLE_DESCRIPTION" [colSpan]="4">
+        <dxo-label template="คำอธิบาย"></dxo-label>
+      </dxi-item>
+    </dx-form>
+
+    <div class="" style="display: flex; justify-content: center;">
+      <button cButton class="text" color="success" (click)="openEditPopup()">แก้ไข</button>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="empty"></div>
+
+  <div class="header" *ngIf="showAddMore == true">
+
+    <div class="s-btw">
+      <div class="">
+        <h3>เพิ่มหัวข้อย่อย</h3>
+      </div>
+
+      <div class="">
+        <button cButton class="text" color="success" (click)="showSubtitlePopup()">เพิ่มข้อมูล</button>
+      </div>
+
+    </div>
+
+    <div class="data-grid">
+
+      <dx-data-grid id="gridContainer" [dataSource]="SubTitleDataArr" [showBorders]="true">
+        <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="true">
+        </dxo-editing>
+        <dxo-editing mode="row">
+        </dxo-editing>
+
+        <dxi-column dataField="SUB_TITLE" [width]="250"></dxi-column>
+        <dxi-column dataField="SUB_TITLE_DESCRIPTION"[width]="120"></dxi-column>
+        <dxi-column dataField="METHOD" [width]="80"></dxi-column>
+        <dxi-column dataField="URL" [width]="120"></dxi-column>
+
+        <dxo-paging [pageSize]="100"></dxo-paging>
+
+      </dx-data-grid>
+    </div>
+  </div>
+
+
+  <div class="empty"></div>
+
+  <div class="empty"></div>
+
+  <div class="" style="    display: flex;
+  justify-content: center;
+">
+    <button cButton class="text" color="success" (click)="nevBack()">เสร็จสิน</button>
+  </div>
+
+  <!-- popup -->
+  <dx-popup [width]="760" [height]="440" [(visible)]="addParamPopup" title="add parameter">
+    <div class="container" style="margin: 10px 0;">
+
+      <dx-form [formData]="ParamValue" [colCount]="4">
+        <dxi-item [colSpan]="2" dataField="PARAMETER_NAME">
+          <dxo-label template="ชื่อ Parameter"></dxo-label>
+        </dxi-item>
+
+        <dxi-item [colSpan]="2" dataField="PARAMETER_STATUS">
+          <dx-select-box [items]="_required" [(value)]="ParamValue.PARAMETER_STATUS"></dx-select-box>
+        </dxi-item>
+
+        <dxi-item [editorOptions]="heights" editorType="dxTextArea" dataField="PARAMETER_DESCRIPTION" [colSpan]="4">
+          <dxo-label template="คำอธิบาย"></dxo-label>
+        </dxi-item>
+      </dx-form>
+
+
+      <button cButton class="text" style="margin-right: 20px;" color="success" (click)="saveParam()">บันทึก</button>
+      <button cButton class="text" style="margin-right: 20px;" color="danger" (click)="closeParam()">ยกเลิก</button>
+
+
+    </div>
+  </dx-popup>
+
+
+  <!-- edit title popup -->
+
+  <dx-popup [width]="760" [height]="440" [(visible)]="editTitlePopup" title="edit title">
+    <div class="container" style="margin: 10px 0;">
+
+      <dx-form [formData]="editForm" [colCount]="4">
+        <dxi-item [colSpan]="2" dataField="TITLE">
+          <dxo-label template="หัวข้อ"></dxo-label>
+        </dxi-item>
+
+        <dxi-item [colSpan]="2" dataField="CATEGORY_ID">
+          <dxo-label template="หมวดหมู่"></dxo-label>
+          <dx-select-box  [items]="_category" [dataSource]="_category" [(value)]="titleData.CATEGORY_ID"
+            valueExpr="CATEGORY_ID" displayExpr="CATEGORY_NAME"></dx-select-box>
+        </dxi-item>
+
+
+        <dxi-item [editorOptions]="heights" editorType="dxTextArea" dataField="TITLE_DESCRIPTION" [colSpan]="4">
+          <dxo-label template="คำอธิบาย"></dxo-label>
+        </dxi-item>
+      </dx-form>
+
+      <button cButton class="text" style="margin-right: 20px;" color="success" (click)="onSaveEdit()">บันทึก</button>
+      <button cButton class="text" style="margin-right: 20px;" color="danger" (click)="closeEditPopup()">ยกเลิก</button>
+
+
+    </div>
+  </dx-popup>
+
+
+  <dx-popup [width]="760" [height]="800" [hideOnOutsideClick]="true" [showCloseButton]="true"
+    [(visible)]="subtitlePopup" title="add">
+    <div class="">
+      <h1>เพิ่มหัวข้อย่อย</h1>
+      <dx-form [formData]="subTitleData" [colCount]="4">
+        <dxi-item [colSpan]="2" dataField="SUB_TITLE">
+          <dxo-label template="หัวข้อ"></dxo-label>
+        </dxi-item>
+        <dxi-item [colSpan]="2" dataField="METHOD">
+          <dx-select-box [items]="_method" [(value)]="subTitleData.METHOD"></dx-select-box>
+        </dxi-item>
+        <dxi-item dataField="url" [colSpan]="4"></dxi-item>
+        <dxi-item [editorOptions]="heights" editorType="dxTextArea" dataField="SUB_TITLE_DESCRIPTION" [colSpan]="4">
+          <dxo-label template="คำอธิบาย"></dxo-label>
+        </dxi-item>
+      </dx-form>
+
+      <div class="card" style="margin: 30px 0;">
+        <div class="" id="">
+          <div class="dataGrid" style="margin: 20px;">
+
+            <div class="head" style="display: flex; justify-content: space-between; padding: 10px;">
+              <p>parameter</p>
+              <button cButton color="primary" style="margin-left: 10px;" (click)="popupParam()">เพิ่ม</button>
+            </div>
+
+            <dx-data-grid id="gridContainer" style="padding: 10px;" [dataSource]="paramForms" [showBorders]="true">
+              <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="true">
+              </dxo-editing>
+              <dxo-editing mode="row">
+              </dxo-editing>
+              <dxi-column dataField="PARAMETER_NAME" [width]="250"></dxi-column>
+              <dxi-column dataField="PARAMETER_STATUS" [width]="150"></dxi-column>
+              <dxi-column dataField="PARAMETER_TYPE" [width]="100"></dxi-column>
+              <dxi-column dataField="PARAMETER_DESCRIPTION"></dxi-column>
+              <dxo-paging [pageSize]="100"></dxo-paging>
+            </dx-data-grid>
+          </div>
+
+          <div class="dataGrid" style="margin: 20px;">
+            <div class="head" style="display: flex; justify-content: space-between; padding: 10px;">
+              <p>Meta Data</p>
+              <button cButton color="primary" style="margin-left: 10px;" (click)="popupMeta()">เพิ่ม</button>
+            </div>
+
+            <dx-data-grid id="gridContainer" style="padding: 10px;" [dataSource]="metaForms" [showBorders]="true">
+              <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="true">
+              </dxo-editing>
+              <dxo-editing mode="row">
+              </dxo-editing>
+              <dxi-column dataField="META_NAME"></dxi-column>
+              <dxi-column dataField="META_DETAIL"></dxi-column>
+              <dxo-paging [pageSize]="100"></dxo-paging>
+            </dx-data-grid>
+          </div>
+
+
+          <div style="margin: 20px;">
+            <p>JSON</p>
+            <dx-form [formData]="jsonForms" [colCount]="4">
+              <dxi-item [editorOptions]="heights" editorType="dxTextArea" dataField="JSON" [colSpan]="4">
+                <dxo-label template="Json"></dxo-label>
+              </dxi-item>
+            </dx-form>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="btn">
+          <button class="save-bte text" cButton color="success"
+            (click)="onSubmitSubtitlePopupDetail()">เพิ่มข้อมูล</button>
+        </div>
+
+      </div>
+
+
+
+
+
+    </div>
+  </dx-popup>
+
+
+
+
+  <!-- addmeta -->
+  <dx-popup [width]="660" [height]="440" [hideOnOutsideClick]="false" [showCloseButton]="false"
+    [(visible)]="addMetaPopup" title="add - edit">
+
+    <div class="">
+      <dx-form [formData]="MetaValue" [colCount]="4">
+
+        <dxi-item [colSpan]="4" dataField="META_NAME">
+          <dxo-label template="METANAME"></dxo-label>
+        </dxi-item>
+        <dxi-item [colSpan]="4" dataField="META_DETAIL">
+          <dxo-label template="METADETAIL"></dxo-label>
+        </dxi-item>
+
+      </dx-form>
+    </div>
+
+    <div class="" style="display: flex; ; justify-content: center; margin: 30px 0;">
+      <button cButton class="text" color="success" style="margin: 0 20px;" (click)="saveMeta()">บันทึก</button>
+      <button cButton class="cancle-btn text" color="danger" (click)="closeMeta()">ยกเลิก</button>
+    </div>
+  </dx-popup>

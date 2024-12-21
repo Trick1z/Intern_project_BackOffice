@@ -1,0 +1,122 @@
+.title-header {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.btns {
+  margin-top: 20px;
+
+  .send-data {
+    .text {
+      color: white;
+    }
+  }
+}
+
+.text {
+  color: white;
+}
+
+.long-btn {
+  width: 100%;
+}
+
+.w200 {
+  width: 200px;
+}
+
+.container2 {
+  margin-top: 50px;
+
+  .add {
+    justify-content: space-between;
+    display: flex;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+
+  // .btn {
+  //   justify-content: right;
+  //   display: flex;
+  //   margin: 0px 10px 0 0;
+  // }
+
+  .btn {
+    .cancle-btn {
+      margin-left: 10px;
+    }
+  }
+}
+
+.data-grid {
+  margin-top: 50px;
+}
+
+.empty {
+  margin: 50px 0;
+}
+
+.header {
+  border-radius: 20px;
+  box-shadow: 3px 1px #d5d4d4;
+  margin-top: 20px;
+  padding: 15px;
+
+  .s-btw {
+    display: contents;
+  }
+}
+
+.text {
+  color: white;
+}
+
+.send-data {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.Json-body {
+  background-color: white;
+  box-shadow: 3px 1px #d5d4d4;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 15px;
+}
+
+.title-header {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 3px 1px #d5d4d4;
+  margin-top: 20px;
+  padding: 15px;
+
+  dx-form {
+    padding: 20px;
+  }
+}
+
+.inputboard {
+  background-color: rgb(223, 223, 223);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 2px #b1b1b1;
+}
+
+.cards {
+  background-color: rgb(223, 223, 223);
+
+}
+.containers{
+  background-color: rgb(230, 230, 230);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 2px #bfbfbf;
+
+
+}

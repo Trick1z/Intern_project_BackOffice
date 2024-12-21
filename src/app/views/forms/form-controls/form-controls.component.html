@@ -1,0 +1,138 @@
+<div class="btn " style="display: flex; justify-content: right;">
+  <button cButton color="danger" class="txt" style="margin-right: 10px; " (click)="back()">ย้อนกลับ</button>
+</div>
+
+<div class="container">
+    <div class="forms">
+      <div class="title">
+        <dx-form [formData]="titleForms" [colCount]="4">
+
+          <dxi-item [colSpan]="2" dataField="TITLE">
+            <dxo-label template="ชื่อ"></dxo-label>
+          </dxi-item>
+
+          <dxi-item [colSpan]="2" dataField="category_id">
+            <dxo-label template="หมวดหมู่"></dxo-label>
+            <dx-select-box [items]="_category" [dataSource]="_category" [(value)]="titleForms.CATEGORY_ID"
+              valueExpr="CATEGORY_ID" displayExpr="CATEGORY_NAME" displayValue="{{titleForms.CATEGORY_NAME}}" ></dx-select-box>
+          </dxi-item>
+
+          <dxi-item [colSpan]="4" [editorOptions]="height" editorType="dxTextArea" dataField="TITLE_DESCRIPTION">
+            <dxo-label template="คำอธิบาย"></dxo-label>
+          </dxi-item>
+
+
+
+
+        </dx-form>
+      </div>
+
+
+  </div>
+  <!-- dataGrid -->
+  <div class="SUBDATAGRID" style="margin: 60px 0;">
+    <div class="header " style="border-radius: 10px; display: flex; justify-content: center; margin-top: 10px 0;">
+      <h1>หัวข้อย่อย</h1>
+
+      <div class="" style="margin: 10px 0;">
+        <dx-data-grid id="gridContainer" style="position: relative;" [dataSource]="_subData.Value" [showBorders]="true">
+          <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="false">
+          </dxo-editing>
+          <!-- [columns]="['MAIN_ID','TITLE', 'METHOD','URL', 'CREATE_DATE' , 'TITLE_DESCRIPTION']" -->
+          <!-- <dxo-paging [pageSize]="10"></dxo-paging> -->
+          <dxo-editing mode="row">
+          </dxo-editing>
+
+<!--
+          <div *dxTemplate="let data of 'cellTemplateDelte'">
+            <button cButton color="primary" style="margin-left: 10px;">เพิ่มข้อมูล</button>
+          </div>
+
+          <dxi-column [width]="120" cellTemplate="cellTemplateDelte"></dxi-column> -->
+
+
+          <dxi-column dataField="SUB_TITLE" [width]="250"></dxi-column>
+          <dxi-column dataField="SUB_TITLE_DESCRIPTION" [width]="250"></dxi-column>
+          <dxi-column dataField="METHOD" [width]="70"></dxi-column>
+          <dxi-column dataField="URL"></dxi-column>
+<!--
+          <div *dxTemplate="let col of 'cellTemplateSubEdit'">
+            <button style="margin-right: 10px;" cButton color="primary">แก้ไข</button>
+            <button cButton color="danger" class="text" style="margin-right: 10px;">ลบ</button>
+          </div>
+          <dxi-column [width]="150" cellTemplate="cellTemplateSubEdit"></dxi-column> -->
+
+          <dxo-paging [pageSize]="100"></dxo-paging>
+
+        </dx-data-grid>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="edit-box">
+  <div class="" style="margin: 50px 0;" *ngFor="let item of _subData.Value ; let i = index">
+
+    <h1>{{_subData.Value[i].SUB_TITLE}}</h1>
+
+    <dx-data-grid id="gridContainer" style="position: relative;" [dataSource]="paramData[i].Value" [showBorders]="true">
+      <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="false">
+      </dxo-editing>
+      <dxo-editing mode="row">
+      </dxo-editing>
+
+      <dxi-column dataField="PARAMETER_NAME" [width]="150"></dxi-column>
+      <dxi-column dataField="PARAMETER_STATUS" [width]="90"></dxi-column>
+      <dxi-column dataField="PARAMETER_TYPE" [width]="70"></dxi-column>
+      <dxi-column dataField="PARAMETER_DESCRIPTION"></dxi-column>
+
+
+<!--
+      <div *dxTemplate="let col of 'cellTemplateSubEdit'">
+
+        <button style="margin-right: 10px;" cButton color="primary">แก้ไข</button>
+
+        <button cButton color="danger" class="text" style="margin-right: 10px;">ลบ</button>
+      </div>
+      <dxi-column [width]="150" cellTemplate="cellTemplateSubEdit"></dxi-column> -->
+
+
+
+      <dxo-paging [pageSize]="100"></dxo-paging>
+    </dx-data-grid>
+
+
+    <div class="json-body" style="margin: 20px 0;">
+      <div class="json">
+        <dx-form [formData]="jsonData[i].Value[0]" [colCount]="4">
+          <dxi-item [colSpan]="4" [editorOptions]="height" editorType="dxTextArea" dataField="JSON">
+            <dxo-label template="JSON"></dxo-label>
+          </dxi-item>
+        </dx-form>
+      </div>
+    </div>
+
+
+
+    <div class="metaData">
+
+      <dx-data-grid id="gridContainer" style="position: relative;" [dataSource]="metaDataForm[i].Value" [showBorders]="true">
+        <dxo-editing mode="row" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="false">
+        </dxo-editing>
+        <dxo-editing mode="row">
+        </dxo-editing>
+
+        <dxi-column dataField="META_NAME" [width]="180"></dxi-column>
+        <dxi-column dataField="META_DETAIL" ></dxi-column>
+
+      </dx-data-grid>
+    </div>
+  </div>
+</div>
+
+
+<div class="btn" style="display: flex; justify-content: center;">
+  <button cButton color="success" class="txt" style="margin-right: 10px;" (click)="_test()">บันทึก</button>
+</div>

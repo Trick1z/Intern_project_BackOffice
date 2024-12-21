@@ -1,0 +1,26 @@
+.login-container {
+
+  display: flex;
+  justify-content: center;
+
+  margin:25% ;
+  .card {
+    padding: 50px;
+    width: 350px;
+    height: 360px;
+    box-shadow: 4px 3px rgb(228, 228, 228);
+  }
+
+  .register-text {
+
+    p {
+      text-align: center;
+    }
+  }
+
+
+}
+
+.text {
+  color: white;
+}

@@ -1,0 +1,176 @@
+<div class="head1">
+  <div class="title-header">
+    <div class="title">
+      <h1>{{_mainData.Value[1].TITLE}}</h1>
+      <p>{{_mainData.Value[1].TITLE_DESCRIPTION}}</p>
+
+    </div>
+  </div>
+  <div class="title-header">
+
+
+
+
+    <div class="empty"></div>
+
+    <div class="">
+      <h1>{{_mainData.Value[1].SUB_TITLE}}</h1>
+      <p>{{_mainData.Value[1].SUB_TITLE_DESCRIPTION}}</p>
+
+    </div>
+
+    <div class="table" style="margin: 20px 0 50px 0;">
+      <table bordered cTable>
+        <tbody>
+          <tr>
+            <th scope="row">วิธีการ</th>
+            <td>{{_mainData.Value[1].METHOD}}</td>
+          </tr>
+          <tr>
+            <th scope="row">URL</th>
+            <td>{{_mainData.Value[1].URL}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+   <div style="margin-bottom: 50px ;">
+    <div class="" style="margin: 20px 0; justify-content: space-between; display: flex;">
+      <h2>ข้อมูล API</h2>
+      <button class="text" cButton color="primary" (click)="_getDisplay(12,0)">แสดงข้อมูล</button>
+    </div>
+
+    <div class="data-grid" style="margin: 30px 0;">
+      <dx-data-grid id="gridContainer" [dataSource]="_display[0]"> <dxo-editing mode="row" [allowAdding]="false"
+          [allowUpdating]="false" [allowDeleting]="false">
+        </dxo-editing>
+
+        <dxi-column dataField="PARAMETER_NAME" [width]="150"></dxi-column>
+        <dxi-column dataField="REQUIRED_STATUS" [width]="150"></dxi-column>
+        <dxi-column dataField="TYPE" [width]="100"></dxi-column>
+        <dxi-column dataField="PARAMETER_DESCRIPTION"></dxi-column>
+      </dx-data-grid>
+
+    </div>
+   </div>
+
+
+    <h2>Response</h2>
+    <div class="json-res" style="margin: 30px 0;">
+      <pre>{{_mainData.Value[1].JSON}}</pre>
+    </div>
+
+
+  </div>
+
+</div>
+
+<!-- ข้อ 2 -->
+<div class="head1">
+  <div class="title-header">
+    <div class="empty"></div>
+
+    <div class="">
+      <h1>{{_mainData.Value[5].SUB_TITLE}}</h1>
+      <p>{{_mainData.Value[5].SUB_TITLE_DESCRIPTION}}</p>
+    </div>
+
+    <div class="table" style="margin: 20px 0 50px 0;">
+      <table bordered cTable>
+        <tbody>
+          <tr>
+            <th scope="row">วิธีการ</th>
+            <td>{{_mainData.Value[5].METHOD}}</td>
+          </tr>
+          <tr>
+            <th scope="row">URL</th>
+            <td>{{_mainData.Value[5].URL}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+   <div style="margin-bottom: 50px ;">
+    <div class="" style="margin: 20px 0; justify-content: space-between; display: flex;">
+      <h2>ข้อมูล API</h2>
+      <button class="text" cButton color="primary" (click)="_getDisplay(13,1)">แสดงข้อมูล</button>
+    </div>
+
+    <div class="data-grid" style="margin: 30px 0;">
+      <dx-data-grid id="gridContainer" [dataSource]="_display[1]"> <dxo-editing mode="row" [allowAdding]="false"
+          [allowUpdating]="false" [allowDeleting]="false">
+        </dxo-editing>
+
+        <dxi-column dataField="PARAMETER_NAME" [width]="150"></dxi-column>
+        <dxi-column dataField="REQUIRED_STATUS" [width]="150"></dxi-column>
+        <dxi-column dataField="TYPE" [width]="100"></dxi-column>
+        <dxi-column dataField="PARAMETER_DESCRIPTION"></dxi-column>
+      </dx-data-grid>
+
+    </div>
+   </div>
+
+
+    <h2>Response</h2>
+    <div class="json-res" style="margin: 30px 0;">
+      <pre>{{_mainData.Value[5].JSON}}</pre>
+    </div>
+  </div>
+</div>
+
+<div class="head1">
+  <div class="title-header">
+    <div class="empty"></div>
+
+    <div class="">
+      <h1>{{_mainData.Value[8].SUB_TITLE}}</h1>
+      <p>{{_mainData.Value[8].SUB_TITLE_DESCRIPTION}}</p>
+
+    </div>
+
+    <div class="table" style="margin: 20px 0 50px 0;">
+      <table bordered cTable>
+        <tbody>
+          <tr>
+            <th scope="row">วิธีการ</th>
+            <td>{{_mainData.Value[8].METHOD}}</td>
+          </tr>
+          <tr>
+            <th scope="row">URL</th>
+            <td>{{_mainData.Value[8].URL}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+   <div style="margin-bottom: 50px ;">
+    <div class="" style="margin: 20px 0; justify-content: space-between; display: flex;">
+      <h2>ข้อมูล API</h2>
+      <button class="text" cButton color="primary" (click)="_getDisplay(14,2)">แสดงข้อมูล</button>
+    </div>
+
+    <div class="data-grid" style="margin: 30px 0;">
+      <dx-data-grid id="gridContainer" [dataSource]="_display[2]"> <dxo-editing mode="row" [allowAdding]="false"
+          [allowUpdating]="false" [allowDeleting]="false">
+        </dxo-editing>
+
+        <dxi-column dataField="PARAMETER_NAME" [width]="150"></dxi-column>
+        <dxi-column dataField="REQUIRED_STATUS" [width]="150"></dxi-column>
+        <dxi-column dataField="TYPE" [width]="100"></dxi-column>
+        <dxi-column dataField="PARAMETER_DESCRIPTION"></dxi-column>
+      </dx-data-grid>
+
+    </div>
+   </div>
+
+    <h2>Response</h2>
+    <div class="json-res" style="margin: 30px 0;">
+      <pre>{{_mainData.Value[8].JSON}}</pre>
+    </div>
+  </div>
+</div>

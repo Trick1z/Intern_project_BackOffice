@@ -1,0 +1,25 @@
+<div class="inputboard ">
+  <div class="title-header">
+
+    <h1>เพิ่มหมวดหมู่</h1>
+    <dx-form [formData]="categoryForm" [colCount]="4">
+      <dxi-item [colSpan]="2" dataField="CATEGORY_NAME">
+        <dxo-label template="ชื่อหมวดหมู่"></dxo-label>
+      </dxi-item>
+
+      <dxi-item></dxi-item>
+      <dxi-item></dxi-item>
+
+      <dxi-item [editorOptions]="heights" editorType="dxTextArea" dataField="CATEGORY_DETAIL" [colSpan]="4">
+        <dxo-label template="คำอธิบาย"></dxo-label>
+      </dxi-item>
+
+
+    </dx-form>
+  </div>
+
+  <div class="btn">
+    <div class="">
+      <button cButton class="txt" color="success" (click)="onSubmit()">ส่งข้อมูล</button>
+    </div>
+  </div>

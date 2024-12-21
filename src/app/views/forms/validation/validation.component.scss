@@ -1,0 +1,44 @@
+.title-header {
+  background-color: white;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+
+
+  .response {
+    background-color: rgb(255, 230, 121);
+    border-radius: 5px;
+
+    h1 {
+      margin: 10px;
+    }
+
+    pre {
+     padding: 15px;
+    }
+  }
+
+}
+
+.primary {
+  margin: 10px;
+}
+
+.text {
+  color: white;
+}
+
+
+.data-grid {
+  padding:20px;
+}
+
+
+.btn-end{
+  text-align: -webkit-right;
+}
+
+
+.space{
+  margin: 30px 0;
+}
